@@ -1,0 +1,49 @@
+#title, #tags, #body, #intro_image, #image_urls, #video_url, #post_form, #post_list{
+	position:relative;
+	margin:auto;
+	width:100%;
+}
+
+#title, #tags, #intro_image, #image_urls, #video_url{
+	font-size:25px;
+	height:30px;
+}
+
+.form_element{
+	width:100%;
+	margin: 20px auto;
+}
+
+#post_form{
+	width:748px;
+	height:100%;
+	float:left;
+	margin-right:20px;
+}
+
+#post_list{
+	width:192px;
+	height:100%;
+	float:left;
+}
+
+#post_list li{
+	margin:5px;
+}
+
+#post_list li:hover{
+	cursor:pointer;
+}
+
+.id{
+	padding:5px;
+}
+
+.delete_post{
+	padding:5px;
+	width:20px;
+}
+
+.delete_post:hover{
+	cursor:pointer;
+}

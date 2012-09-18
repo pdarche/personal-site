@@ -1,0 +1,59 @@
+<h1> <%= @title %> </h1>
+<div id="project_form">
+	<div>
+		<h2>Add New Project</h2>
+	</div>
+	<div>
+		<form action="/add_project" method="POST" id="new_project" enctype="multipart/form-data">
+			<p class="form_element">
+				<label>Title:</label></br>
+				<input type="text" name="new_project[title]" id="title" class="project_input"/>
+			</p>
+			<p class="form_element">
+				<label>Collaborators</label></br>
+				<input type="text" name="new_project[collaborators]" id="collaborators" class="project_input"/>
+			</p>
+			<p class="form_element">
+				<label>Short Description</label></br>
+				<textarea type="text" rows="10" cols="40" name="new_project[short_description]" id="short_description" class="project_input"></textarea>
+			</p>
+			<p class="form_element">
+				<label>Long Description</label></br>
+				<textarea type="text" rows="10" cols="40" name="new_project[long_description]" id="long_description" class="project_input"></textarea>
+			</p>
+				<p class="form_element">
+				<label>Motivation</label></br>
+				<textarea type="text" rows="10" cols="40" name="new_project[motivation]" id="motivation" class="project_input"></textarea>
+			</p>
+				<p class="form_element">
+				<label>Process</label></br>
+				<textarea type="text" rows="10" cols="40" name="new_project[process]" id="process" class="project_input"></textarea>
+			</p>
+			<p class="form_element">
+				<label>Small Image Url</label></br>
+				<input type="text" name="new_project[small_image_url]" id="small_image_url" class="project_input"/>
+			</p>
+			<p class="form_element">
+				<label>Video Url</label></br>
+				<input type="text" name="new_project[video_url]" id="video_url" class="project_input"/>
+			</p>
+			<p class="form_element">
+				<input id="new_project_submit" type="submit" value="submit"/>
+			</p>
+		</form>
+	</div>
+</div>
+<div id="project_list">
+	<div>
+		<center><h2>Edit Projects </h2></center>
+	</div>
+	<div>
+		<table>
+			<%= partial 'project_title', :collection => @projects %>
+	</table>
+	</div>
+</div>
+
+
+
+

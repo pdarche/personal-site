@@ -1,0 +1,34 @@
+<article>
+	<hgroup>
+	<div id="hgroup">	
+			<h1> <%= @project.title %> </h1>
+			<div id="date_collab">
+				<h5 id="project_date"> <%= @project.date %></h5>
+				<h5 id="collaborators"> <%= @project.collaborators %> </h5>
+			</div>
+		</div>
+		<!-- <div id="border_div"></div> -->
+	</hgroup>
+	<div class="project_body">
+		<div id="video">
+			<iframe src="http://<%= @project.video_url %>?title=0&amp;byline=0&amp;portrait=0" width="940" height="520" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		</div>
+		<div id="additional_content">more</div>
+		<div id="description">
+			<h4 class="subheading">Overview</h4>
+			<p id="description_content"><%= @project.long_description %></p>
+		</div>
+
+		<div id="motivation">
+			<h4 class="subheading"></h4>
+		</div>
+
+		<div id="process">
+			<h4 class="subheading"></h4>
+		</div>
+
+	</div>
+	<div class="comments">
+		<p>Comments</p>
+	</div>
+</article>

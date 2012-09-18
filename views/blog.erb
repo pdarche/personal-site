@@ -1,0 +1,7 @@
+<div id="blog_posts">
+	<%= partial 'post', :collection => @posts %>
+</div>
+<div id="page_link">
+	<a href="<%= @next_page %>">next</a><p>|</p>
+	<a href="<%= @last_page %>">previous</a> 
+</div>

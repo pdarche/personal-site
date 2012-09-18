@@ -1,0 +1,58 @@
+#title, #collaborators, #short_description, #motivation, #process, #long_description, #small_image_url, #video_url{
+	position:relative;
+	margin:auto;
+	width:100%;
+}
+
+#title, #collaborators, #small_image_url, #video_url{
+	height:30px;
+	font-size:20px;
+}
+
+.form_element{
+	width:100%;
+	margin: 20px auto;
+}
+
+#project_form{
+	width:748px;
+	height:100%;
+	float:left;
+	margin-right:20px;
+}
+
+#project_list{
+	width:192px;
+	height:100%;
+	float:left;
+}
+
+#project_list li{
+	margin:5px;
+}
+
+#project_list li:hover{
+	cursor:pointer;
+}
+
+.delete_post{
+	height:20px;
+	width:20px;
+}
+
+.project_title:hover, .delete_post:hover{
+	cursor:pointer;
+}
+
+#update_popup{
+	position:absolute;
+	top:400px;
+	left:-150px;
+	display:none;
+	width: 300px;
+	height:200px;
+	margin: 50% auto;
+	font-size:30px;
+	text-align:center;
+	line-height:500%;
+}

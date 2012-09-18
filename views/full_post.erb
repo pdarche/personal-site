@@ -1,0 +1,59 @@
+<article>
+	<hgroup>
+		<div id="hgroup">	
+			<h1> <%= @post.title %> </h1>
+			<div id="date">
+				<h5 id="project_date"> <%= @post.date.strftime('%B %e, %Y') %></h5>
+				<% @postTags.each do |tag| %>
+				    <h5 class="tag"><a href="/tag/<%= tag.tag.gsub(' ', '-') %>"><%= tag.tag %></a></h5>
+				<% end %>
+			</div>
+		</div>
+	</hgroup>
+	<div id="body_tags_wrapper">
+		<div class="post-body">
+			<%= @post.body %>
+		</div>
+		<div class="tags">
+			<h4>tags</h4>
+			<ul id="tag_list">
+			<% @allTags.each do |tag| %>
+			    <li><a href="../tag/<%= tag.tag %>"><%= tag.tag %></a></li>
+			<% end %>
+			</ul>
+		</div>
+	</div>
+	<div id="comments">
+		<h4 id="comment_heading"> comments <span id="comment_link"> Leave a comment </span></h4>
+		<!-- partials of comments  -->
+		<%= partial 'comment', :collection => @comments %>
+	</div>
+	<p id="post_id"><%= @post.id %></p>
+</article>
+<div id="comment_form">
+	<div id="comment_form_wrapper">
+		<div>
+			<h2>Leave a Comment</h2>
+		</div>
+		<div>
+			<form action="post_comment" method="POST" id="new_comment" enctype="multipart/form-data">
+				<p class="form_element">
+					<label>Your Name</label></br>
+					<input type="text" name="new_comment[commenter]" id="name" class="post_input"/>
+				</p>
+				<p class="form_element">
+					<label>Comment</label></br>
+					<textarea rows="10" cols="40" name="new_comment[comment]" id="comment" class="post_input"></textarea>
+				</p>
+				<p class="form_element" id="hidden_id">
+					<input type="text" name="new_comment[postId]" id="postId" class="post_input"/>
+				</p>
+				<p class="form_element">
+					<input type="submit" id="new_post_submit"/>
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+

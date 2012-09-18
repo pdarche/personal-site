@@ -1,0 +1,36 @@
+<div id="about_container">
+	
+	<div id="top_wrapper">
+		<div id="map">
+		</div>
+	</div>
+
+	<div id="bottom_wrapper">
+		<div id="steps" class="data">
+			<div id="steps_title">
+				Today, I've taken
+			</div>
+			<div id="steps_data">
+				<%= @steps %> <span id="steps_span"> steps </span>
+			</div>		
+		</div>
+
+		<div id="weight" class="data">
+			<div id="weight_title">
+				I currently weigh 
+			</div>
+			<div id="weight_data">
+				<%= @weight %> <span id="weight_span"> lbs. </span>
+			</div>
+		</div>
+
+		<div id="sleep" class="data">
+			<div id="sleep_title">
+				Last night, I slept for
+			</div>
+			<div id="sleep_data">
+				7 <span class="time_span"> hours & </span> <span id="mins_span"> 23 </span> <span id="minutes_span" class="time_span"> minutes </span> <span><%= @sleep %> pizza</span>
+			</div>
+		</div>
+	</div>
+</div>

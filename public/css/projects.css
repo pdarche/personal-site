@@ -1,0 +1,159 @@
+#title_wrapper{
+    width:100%;
+    margin:0px;
+    height:75px;
+    margin-top:20px;
+}
+
+h1{
+    margin:10px 0px;
+}
+
+#title{
+    float:left;
+    /*background-color:rgba(255,255,255,.5);*/
+    border:1px solid white;
+    padding-left:10px;
+    padding-right:10px;
+    margin-left:10px; 
+    font-size:20px;  
+}
+
+#allProjects{
+    position:relative;
+    top:0px;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}
+
+.project{
+    background-color: rgba(255,255,255,.5);
+    width:300px;
+    height:280px;
+    border: 1px solid white;
+    margin:8px;
+    float:left;
+    -webkit-box-shadow:  
+        3px 3px 5px -3px #888,
+        -3px 3px 5px -3px #888;
+}
+
+.project a{
+    width:220px;
+    height:170px;
+}
+
+.project-image{
+    width:280px;
+    height:200px;
+    margin: 10px auto;
+}
+
+.project-description, .project-image p{
+    width:280px;
+    height:40px;
+    margin: 10px auto;
+}
+
+.project:hover{
+    cursor:pointer;
+}
+
+img{
+    width:280px;
+    height:200px;
+}
+
+#projectPicture{
+    position:absolute;
+    top:0px;
+    width:600px;
+    height:400px;
+    border:1px dotted white;
+}
+
+#projectMenu{
+    position:absolute;
+    top:0px;
+    left:620px;
+    width:340px;
+    height:400px;
+    border: 1px dotted white;
+}
+
+#projectTitle{
+    position:relative;
+    top:20px;
+    height:70px;
+    width:250px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+#projectInfo{
+    position:absolute;
+    top:420px;
+    width:960px;
+    height:600px;
+    border: 1px dotted white;
+}
+
+#projectDescriptionShort{
+    position:relative;
+    top:20px;
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:justify;
+}
+
+#showProjects{
+    background-color:gray;
+    opacity:.7;
+    position:absolute;
+    left:-20px;
+    width:10px;
+    word-wrap: break-word;
+    padding:5px;
+}
+
+#showProjects:hover{
+    cursor:pointer;
+}
+
+#sections{
+    position:relative;
+    top:20px;
+    left:-50px;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.sectionLink{
+    left:-30px;
+    padding:10px;
+    display:inline;
+    list-style-type:none;
+}
+
+.project_cover{
+    position:relative;
+    top:-277px;
+    left:-1px;
+    width:302px;
+    height:282px;
+    background-color:rgba(0,0,0,.85);
+    z-index:10;
+}
+
+.projects{
+    height:600px;
+}
+
+#next_page{
+    float:right;
+    margin-right:30px;
+}

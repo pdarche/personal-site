@@ -1,0 +1,6 @@
+<div class="title">
+	<h1>Posts Tagged "<%= @tag.to_s %>" </h1>
+</div>
+<div id="post_container">
+		<%= partial 'tagged_post', :collection => @posts %>
+</div>

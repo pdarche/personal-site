@@ -1,0 +1,47 @@
+<h1> <%= @title %> </h1>
+<div id="post_form">
+	<div>
+		<h2>Add New Blog Post</h2>
+	</div>
+	<div>
+		<form action="add_post" method="POST" id="new_post" enctype="multipart/form-data">
+			<p class="form_element">
+				<label>Title</label></br>
+				<input type="text" name="new_post[title]" id="title" class="post_input"/>
+			</p>
+			<p class="form_element">
+				<label>Tags</label></br>
+				<input type="text" name="new_post[tags]" id="tags" class="post_input"/>
+			</p>
+			<p class="form_element">
+				<label>Body</label></br>
+				<textarea rows="10" cols="40" name="new_post[body]" id="body" class="post_input"></textarea>
+			</p>
+			<p class="form_element">
+				<label>Intro Image Url</label></br>
+				<input type="text" name="new_post[intro_image_url]" id="intro_image" class="post_input"/>
+			</p>
+				<p class="form_element">
+				<label>Image Urls</label></br>
+				<input type="text" name="new_post[image_urls]" id="image_urls" class="post_input"/>
+			</p>
+			<p class="form_element">
+				<label>Video Url</label></br>
+				<input type="text" name="new_post[video_url]" id="video_url" class="post_input"/>
+			</p>
+			<p class="form_element">
+				<input type="submit" id="new_post_submit"/>
+			</p>
+		</form>
+	</div>
+</div>
+<div id="post_list">
+	<div>
+		<center><h2>Edit Posts </h2></center>
+	</div>
+	<div>
+		<table id="blog_posts">
+			<%= partial 'post_title', :collection => @posts %>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title> <%= @title %> </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/<%= @style %>"/>
+    <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <script src="/javascript/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+    <div id="ribbon">
+    </div>
+    <div class="links">
+        <ul id="linkList">
+            <li id="home"><a href="/">pdarche</a></li>
+            <li id="about"><a href="/about">about</a></li>
+            <li id="work"><a href="/projects">projects</a></li>
+            <li id="blog"><a href="/blog">blog</a></li>
+            <li id="contact"><a href="/contact">contact</a></li>
+            <p id="login" class="newContent">login<p>
+        </ul>
+    </div>
+    <div id="link_wrapper"></div>
+    <div class="content_container">
+        <div class="content">
+            <%= yield %>
+        </div>
+    </div>
+    <script src="/javascript/<%= @javascript %>" type="text/javascript"></script>
+    <script src="/javascript/global.js" type="text/javascript" ></script>
+</body>
+</html>

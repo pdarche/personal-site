@@ -1,0 +1,83 @@
+
+#home_content{
+    position:relative;
+    top:10%;
+    width:960px;
+    height:80%;
+    padding:0px;
+    margin:0px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.introContent{
+    position:relative;
+    /*background-color:rgba(255,255,255,.5);
+    border:1px solid white;*/
+    top:0px;
+    left:0px;
+    width:960px;
+    height:550px;
+    padding:0px;
+    margin:0px;
+ /*   -webkit-box-shadow:  
+        3px 5px 3px -2px #888,
+        -3px 0px 3px -2px #888;
+*/
+}
+
+#homeLinksDiv{
+    /*background-image:url('classy_fabric.png');*/
+    background-color:rgba(255,255,255,.5);
+    opacity:.6;
+    position:relative;
+    height:2px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    border:1px solid white;
+}
+
+#homeLinksDivExp{
+    position:relative;
+    height:51px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+}
+
+#homeLinksUl{
+    position:relative;
+    width:40%;
+    height:100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:0px;
+    margin-bottom:0px;
+    -webkit-padding-start: 0px;
+}
+
+#homeLinksUl li{
+    position:relative;
+    top:17px;
+    /*color: rgba(0,0,0,);*/
+    display:inline;
+    list-style-type:none;
+    opacity:100;
+    padding:10px;
+    margin:auto;
+    text-align:center;
+}
+
+#homeLinksUl a:hover{
+    cursor:pointer;
+    color:black;
+}
+
+#homeLinksUl a{
+    text-decoration:none;
+    /*color:black;*/
+    font-size:25px;
+    color: rgba(0,0,0,.5);
+    text-shadow: 1px 2px 3px #def, 0 0 0 #000, 1px 2px 3px #def;
+}
