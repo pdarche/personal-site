@@ -37,13 +37,13 @@ end
 get '/' do
 	@title = "pdarche"
 	erb :home, :layout => :layout_home
-		#ZEO DATA
-	key = 'E792EA9CAEA84C354A5A241B102C9F46'
-	opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1', :referer => "peterdarche.com" }
-	z = MyZeo.new(key, opts)
-	data = z.get_overall_average_zq_score
-	# data = JSON.parse(data)
-	p @sleep = data #[:response][:status]
+	# 	#ZEO DATA
+	# key = 'E792EA9CAEA84C354A5A241B102C9F46'
+	# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1', :referer => "peterdarche.com" }
+	# z = MyZeo.new(key, opts)
+	# data = z.get_overall_average_zq_score
+	# # data = JSON.parse(data)
+	# p @sleep = data #[:response][:status]
 end
 
 get '/blog' do

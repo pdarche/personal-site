@@ -5,17 +5,20 @@
 		</div>
 		<div class="post-description-container"> 
 			<hgroup>
-				<h1 class="post-title"><a href="/blog/<%= post.title.gsub(' ', '-')%>"> <%= post.title %> </a></h1>
-				<div class="post-date-tags">
-					<h5 class="post-date"> <%= post.date.strftime("%m/%d/%Y") %> </h5>	
-					<% postTags = @tagHash[post.title][0] %>
-					<% postTags.each do |tag| %>
-					<h5 class="tags"><a href="/tag/<%= tag.tag %>"> <%= tag.tag %></a></h5>
-					<% end %>
-				</div>	
+			<h1 class="post-title"><a href="/blog/<%= post.title.gsub(' ', '-')%>"> <%= post.title %> </a></h1>
+			<div class="post-date-tags">
+				<h5 class="post-date"> <%= post.date.strftime("%m/%d/%Y") %> </h5>	
+				<% postTags = @tagHash[post.title][0] %>
+				<% postTags.each do |tag| %>
+				<h5 class="tags"><a href="/tag/<%= tag.tag %>"> <%= tag.tag %></a></h5>
+				<% end %>
+			</div>	
 			</hgroup>
-			<div class="post-description"> <%= post.body %> </div>
+			<div class="post-description"> 
+				<%= post.body %> 
+			</div>
 		</div>
 	</div>
-	<div class="footer"></div>
+	<div class="footer">
+	</div>
 </article>

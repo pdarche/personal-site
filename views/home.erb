@@ -1,6 +1,7 @@
 <div class="introContent">
     <div id="sketch_container">
-        <canvas id="nameSwarm" data-processing-sources="javascript/pjs_sketches/nameSwarm.pde" width="960" height="500">
+        <canvas id="myCanvas" width="960" height="500"> 
+            <!-- data-processing-sources="nameSwarm.pde" -->
             <p>Your browser does not support the canvas tag.</p>
              Note: you can put any alternative content here. 
         </canvas>
@@ -17,3 +18,134 @@
             </ul>
     </div>
 </div>
+<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+//Classes
+var Square = {
+    rect : undefined,
+    img : undefined,
+    velocity : undefined,
+    acceleration : undefined,
+    config : function(){
+        this.rect.strokeWidth = 4
+        this.rect.fillColor = 'white'
+    },      
+    applyForce : function(force){
+
+        this.acceleration += force
+    },
+    update : function(drag){
+        this.velocity += this.acceleration 
+        this.velocity *= (.1 * drag)
+        this.img.position += this.velocity
+
+    }   
+}
+
+var Attractor = {
+
+    rect: undefined,
+    config : function(){
+        this.rect.strokeWidth = 4
+        this.rect.fillColor = 'white'
+    },
+    move : function(max, min){
+
+        if (this.rect.position.x > max || this.rect.position.x < min) {
+           this.velocity.x *= - 1;
+        }
+
+        if (this.rect.position.y > max || this.rect.position.y < min) {
+          this.velocity.y *= - 1;
+        }
+
+        this.rect.position += this.velocity 
+    },
+    attract : function(s){
+        var curPos = new Point (this.rect.position.x, this.rect.position.y ),
+            force = curPos - s.img.position,
+            distance = this.rect.position.getDistance(s.img.position)
+            
+        force.normalize()
+        strength = 2 / distance
+        force *= strength
+        return force
+    },
+}
+
+//Setup
+var squares = [],
+    attractors = [],
+    height = 600,
+    width = 600
+
+//create and place the attractors
+for (var i = 0; i < 14; i++){
+    for (var j = 0; j < 14; j++){
+
+        var attractor = Object.create( Attractor ),
+            pos = new Point ( 264 + (j * 32) , 30 + (i * 32) )
+
+            attractor.rect = new Path.Rectangle( pos, 2)
+            // attractor.config()
+
+            attractors.push(attractor)
+    }
+}
+
+//add image dom elements to be accesd by Paper
+$.each(attractors, function(i){
+    console.log('bwsm-' + i + '.jpeg')
+    $('body').append('<img class="me" id="img' + i + '" src="/images/bw-circle-small-me/bwsm-' + i + '.png"/>')
+})
+
+$('.me').hide()
+
+//create initialize the mover squares
+for (var i = 0; i < 14; i++){
+    for (var j = 0; j < 14; j++){
+
+        var s = Object.create( Square ),            
+            pos = new Point( (-600).rand(1200), (-600).rand(1200) )
+            
+            s.img = new Raster('img' + ((i * 14) + j) )         
+            s.img.position = pos
+
+        var start = new Point( 0, 0 ), 
+            end = new Point ((-1).rand(1), (-1).rand(1))
+
+            s.velocity = start - end
+            s.acceleration = start - end
+            squares.push(s)
+
+    }
+}
+
+//Draw
+var onFrame = function( event ){    
+
+    for( var i = 0; i < squares.length; i++) {
+
+        var newForce = attractors[i].attract(squares[i])
+
+        squares[i].applyForce(newForce)
+
+        squares[i].update(.3)
+
+        var vector = attractors[i].rect.position - squares[i].img.position
+        vector *= .03
+        squares[i].img.position += vector
+
+
+    }
+
+}
+
+//  Whenever the window is resized, recenter the path.
+var onResize = function( event ){
+    view.center
+}
+
+onResize()
+
+
+</script>
