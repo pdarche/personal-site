@@ -37,13 +37,6 @@ end
 get '/' do
 	@title = "pdarche"
 	erb :home, :layout => :layout_home
-	# 	#ZEO DATA
-	# key = 'E792EA9CAEA84C354A5A241B102C9F46'
-	# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1', :referer => "peterdarche.com" }
-	# z = MyZeo.new(key, opts)
-	# data = z.get_overall_average_zq_score
-	# # data = JSON.parse(data)
-	# p @sleep = data #[:response][:status]
 end
 
 get '/blog' do
@@ -309,15 +302,19 @@ get '/about' do
 		data = RestClient.get(url)
 		data = JSON.parse(data.body)
 		data = data['body']['measuregrps'][0]['measures'][0]['value'] * 0.00220462
+		
 		@weight = data.round_to(2)
 
 		# #ZEO DATA
 		# key = 'E792EA9CAEA84C354A5A241B102C9F46'
-		# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1' }
+
+		#ZEO DATA
+		# key = '2A4AAD3C9099FAC17408661BB10F909F'
+		# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1', :referer => "peterdarche.com" }
 		# z = MyZeo.new(key, opts)
 		# data = z.get_overall_average_zq_score
 		# # data = JSON.parse(data)
-		# @sleep = data #[:response][:status]
+		# p @sleep = data #[:response][:status]
 
 	else 
 		puts "you f'd up"
