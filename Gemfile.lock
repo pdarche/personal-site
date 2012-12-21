@@ -88,6 +88,7 @@ DEPENDENCIES
   dm-types
   fitbit
   fitgem
+  httparty
   json
   my_zeo
   oauth2

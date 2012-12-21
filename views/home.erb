@@ -1,6 +1,7 @@
 <div class="introContent">
     <div id="sketch_container">
-        <canvas id="myCanvas" width="960" height="500"> 
+        <canvas id="myCanvas" width="1260" height="700"> 
+
             <!-- data-processing-sources="nameSwarm.pde" -->
             <p>Your browser does not support the canvas tag.</p>
              Note: you can put any alternative content here. 
@@ -66,11 +67,26 @@ var Attractor = {
             distance = this.rect.position.getDistance(s.img.position)
             
         force.normalize()
-        strength = 2 / distance
+        strength = 5 / distance
         force *= strength
         return force
     },
 }
+
+var Repeller = {
+
+    rect: undefined,
+    repel: function(s){
+        var curPos = new Point (this.rect.position.x, this.rect.position.y ),
+            force = curPos - s.img.position,
+            distance = this.rect.position.getDistance(s.img.position)
+            
+        force.normalize()
+        strength = 30/distance
+        force *= strength
+        return force * -1
+    }
+} 
 
 //Setup
 var squares = [],
@@ -83,7 +99,7 @@ for (var i = 0; i < 14; i++){
     for (var j = 0; j < 14; j++){
 
         var attractor = Object.create( Attractor ),
-            pos = new Point ( 264 + (j * 32) , 30 + (i * 32) )
+            pos = new Point ( 406 + (j * 32) , 100 + (i * 32) )
 
             attractor.rect = new Path.Rectangle( pos, 2)
             // attractor.config()
@@ -120,6 +136,12 @@ for (var i = 0; i < 14; i++){
     }
 }
 
+
+//create repeller
+var r = Object.create( Repeller )
+rPos = new Point( view.center ) 
+r.rect = new Path.Rectangle(rPos, 1) 
+
 //Draw
 var onFrame = function( event ){    
 
@@ -134,9 +156,7 @@ var onFrame = function( event ){
         var vector = attractors[i].rect.position - squares[i].img.position
         vector *= .03
         squares[i].img.position += vector
-
-
-    }
+    }  
 
 }
 
@@ -145,7 +165,38 @@ var onResize = function( event ){
     view.center
 }
 
-onResize()
+var counter = 0
+function onMouseDrag( event ){
+    console.log("firing")
+    if ( counter === 0 ) {
+        counter++
+    } else{
+        console.log(event.middlePoint)   
+        r.rect.position = event.middlePoint
+    }
+    for( var i = 0; i < squares.length; i++) {
+        var newForce = r.repel(squares[i])
+        squares[i].applyForce(newForce)
+        squares[i].update(.3)
+    }
+}
 
+// function onMouseMove( event ){
+//     if ( counter === 0 ) {
+//         counter ++
+//     } else{
+//         console.log(event.middlePoint)   
+//         r.rect.position = event.middlePoint
+//     }
+// }
+
+$( document ).ready(function(){
+    // onMouseMove()
+    onMouseDrag()
+
+})
+
+onResize()
+ 
 
 </script>

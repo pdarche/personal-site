@@ -1,17 +1,11 @@
 require 'rubygems'
 require 'bundler'
-require 'dm-serializer'
-require 'dm-types'
-require 'fitbit'
-require 'oauth2'
-require 'oauth'
-require 'rest_client'
-require 'my_zeo'
 
 Bundler.require
 
 require './helpers/partials'
 require './models'
+require './zeo'
 
 helpers Sinatra::Partials
 
@@ -180,39 +174,6 @@ end
 enable :sessions
 
 ##### ABOUT PAGE
-get '/zeo' do
-	# # auth = auth.get(3)
-	# # if auth.state == 0 
-	# # 	auth.state = 1 
-
-	# key = 'peter.darche'
-	# secret = 'Aiy0EeXeRae9AebilaiK1t'
-	# #apiKey = 'E7E4BC5C69C740DFCD30742C5A838FAB'
-
-	# @consumer = OAuth::Consumer.new( key, secret, :site => "https://api.myzeo.com/zeows" )
-	# p @consumer 
-	# @request_token = @consumer.get_request_token(:callback_url => 'http://www.localhost:9393/zeo/auth')
-	# session[:request_token] = @request_token
- #  	redirect @request_token.authorize_url #(:auth_token => session[:request_token])
-
-		# key = 'E792EA9CAEA84C354A5A241B102C9F46'
-		# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1' }
-		# z = MyZeo.new(key, opts)
-		# data = z.get_overall_average_zq_score
-		# data = JSON.parse(data)
-		# print data
-		# @sleep = data[:response][:status]
-end
-
-get '/zeo/auth' do
-
-  @access_token = @request_token.get_access_token :oauth_verifier => params[:oauth_verifier]
-  session[:oauth][:access_token] = @access_token.token
-  session[:oauth][:access_token_secret] = @access_token.secret
-  redirect "/"
-
-end
-
 get '/op' do
 	consumer_key = 'YBT3QATFK3NCGWXT3EKEV2NC6GUHJM2IWLSGK4NEANZHUWDVKUOA'
 	consumer_secret = 'DUHON4YZGHHZL8NUGG4WKBDVTZTCGE0C3AHRYC25SI8CP06BTL1B6PTYNXQ7XH5N'
