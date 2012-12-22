@@ -10,12 +10,13 @@ require 'logger'
 Bundler.require
 
 require './helpers/partials'
-require './helpers/crazylegs'
+# require './helpers/crazylegs'
+require './crazylegs-test'
 require './models'
 require './zeo'
 
 helpers Sinatra::Partials
-helpers Sinatra::Crazylegs 
+# helpers Sinatra::Crazylegs 
 
 configure do
 	set :root, File.dirname(__FILE__)
@@ -261,10 +262,18 @@ get '/about' do
 		consumer_key = "YBT3QATFK3NCGWXT3EKEV2NC6GUHJM2IWLSGK4NEANZHUWDVKUOA"
 		consumer_secret = "DUHON4YZGHHZL8NUGG4WKBDVTZTCGE0C3AHRYC25SI8CP06BTL1B6PTYNXQ7XH5N"
 		base_url = "https://openpaths.cc/api/1"
-		credentials = Crazylegs::Credentials.new(consumer_key,consumer_secret)
-		url = Crazylegs::SignedURL.new(credentials, base_url,'GET')
+		credentials = Credentials.new(consumer_key,consumer_secret)
+		url = SignedURL.new(credentials, base_url,'GET')
 		signed_url = url.full_url
-		resp = HTTParty.get(signed_url)
+		res = HTTParty.get(signed_url)
+		parsed = JSON.parse(res.parsed_response)
+		i = parsed.length - 1
+
+		lat = parsed[i]["lat"]
+		lon = parsed[i]["lon"]
+		
+		@lat = lat
+		@lon = lon
 
 	else 
 		puts "you f'd up"

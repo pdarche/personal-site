@@ -1,5 +1,3 @@
-module Sinatra::Crazylegs
-  
   # Encapsulates a request token, which is what the server returns when
   # you request a user's OAuth Token
   class AccessToken
@@ -297,5 +295,3 @@ module Sinatra::Crazylegs
       [param_part,url_params,oauth_params]
     end
   end
-
-end
