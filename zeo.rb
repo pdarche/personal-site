@@ -12,14 +12,14 @@ class Zeo
   end
 
   def yesterdays_data()
-	month = Date.today().month
-	day = Date.today().day
-	year = Date.today().year
-	day = day - 1
+  	month = Date.today().month
+  	day = Date.today().day
+  	year = Date.today().year
+  	day = day - 1
 
-	date = year.to_s + '-' + month.to_s + '-' + day.to_s
+  	date = year.to_s + '-' + month.to_s + '-' + day.to_s
 
-  	Zeo.get("/getSleepStatsForDate?key=#{@api_key}", :query => {:date => date}, :headers => {"referer" => "127.0.0.1" })
+  	Zeo.get("/getSleepStatsForDate?key=#{@api_key}", :query => {:date => date}, :headers => {"referer" => "127.0.0.1", "accept" => "application/json" })
   end 
 
 end

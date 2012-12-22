@@ -1,13 +1,21 @@
 require 'rubygems'
 require 'bundler'
+require 'base64'
+require 'openssl'
+require 'rubygems'
+require 'hmac-sha1'
+require 'base64'
+require 'logger'
 
 Bundler.require
 
 require './helpers/partials'
+require './helpers/crazylegs'
 require './models'
 require './zeo'
 
 helpers Sinatra::Partials
+helpers Sinatra::Crazylegs 
 
 configure do
 	set :root, File.dirname(__FILE__)
@@ -174,46 +182,6 @@ end
 enable :sessions
 
 ##### ABOUT PAGE
-get '/op' do
-	consumer_key = 'YBT3QATFK3NCGWXT3EKEV2NC6GUHJM2IWLSGK4NEANZHUWDVKUOA'
-	consumer_secret = 'DUHON4YZGHHZL8NUGG4WKBDVTZTCGE0C3AHRYC25SI8CP06BTL1B6PTYNXQ7XH5N'
-	url = 'https://openpaths.cc/'
-	now = Time.now
-
-
-	###################### OAUTH 1, 2-LEGGED IMPLEMENTAION ######################
-
-	# # make the consumer out of your secret and key 
-	# consumer = OAuth::Consumer.new(consumer_key, consumer_secret, 
-	#                                :site => url, 
-	#                                :http_method => :get,
-	#                                :scheme => :query_string) 
-
-	# # make the access token from your consumer 
-	# access_token = OAuth::AccessToken.new consumer 
-
-	# p access_token
-	# # make a signed request! 
-	# r = access_token.get('/api/1', :params => { 'start_time' => now - 24*60*60, 'end_time' => now }) 
-
-
-	###################### OAUTH 2, 2-LEGGED IMPLEMENTAION ######################
-
-	#instantiate client
-	client = OAuth2::Client.new(consumer_key, consumer_secret, :site => url)
-
-	#create token from access token
-	token = OAuth2::AccessToken.from_hash(client, :access_token => consumer_secret)
-
-	#make signed request
-	respones = token.get('/api/1', :params => { 'start_time' => now - 24*60*60, 'end_time' => now}) 
-end
-
-get '/op/auth' do
-	p params[:code]
-	
-end
-
 get '/about' do	
 	auth = Auth.get(1)
 	client = Fitgem::Client.new({:user_id => CONFIG[:fitbit][:user_id], :consumer_key => CONFIG[:fitbit][:auth][:consumer_key], :consumer_secret => CONFIG[:fitbit][:auth][:consumer_secret], :token => auth.access_token, :secret => auth.access_secret})
@@ -264,18 +232,39 @@ get '/about' do
 		data = JSON.parse(data.body)
 		data = data['body']['measuregrps'][0]['measures'][0]['value'] * 0.00220462
 		
-		@weight = data.round_to(2)
-
-		# #ZEO DATA
-		# key = 'E792EA9CAEA84C354A5A241B102C9F46'
+		if data != nil 
+			@weight = data.round_to(2)
+		else
+			@weight = 0
+		end
 
 		#ZEO DATA
-		# key = '2A4AAD3C9099FAC17408661BB10F909F'
-		# opts = { :user_id => 'pdarche@gmail.com', :login => 'pdarche@gmail.com', :password => 'Morgortbort1', :referer => "peterdarche.com" }
-		# z = MyZeo.new(key, opts)
-		# data = z.get_overall_average_zq_score
-		# # data = JSON.parse(data)
-		# p @sleep = data #[:response][:status]
+		z = Zeo.new
+		res = z.yesterdays_data()
+
+		if res.has_key?("sleepStats")
+			sleepMins = res["response"]["sleepStats"]["totalZ"]
+			sleepHrs = sleepMins/60.0
+			timeAr = sleepHrs.to_s.split('.')
+			hrs = timeAr[0]
+			mins = ('0.' + timeAr[1]).to_f * 60
+			mins = mins.to_f
+			mins = mins.round_to(2).to_i
+
+			@hrs = hrs
+			@mins = mins
+		else
+			@hrs = 0
+			@mins = 0
+		end
+		#OPENPATHS DATA
+		consumer_key = "YBT3QATFK3NCGWXT3EKEV2NC6GUHJM2IWLSGK4NEANZHUWDVKUOA"
+		consumer_secret = "DUHON4YZGHHZL8NUGG4WKBDVTZTCGE0C3AHRYC25SI8CP06BTL1B6PTYNXQ7XH5N"
+		base_url = "https://openpaths.cc/api/1"
+		credentials = Crazylegs::Credentials.new(consumer_key,consumer_secret)
+		url = Crazylegs::SignedURL.new(credentials, base_url,'GET')
+		signed_url = url.full_url
+		resp = HTTParty.get(signed_url)
 
 	else 
 		puts "you f'd up"
