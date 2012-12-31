@@ -16,4 +16,4 @@ gem "oauth2"
 gem "my_zeo"
 gem "httparty"
 # gem 'crazylegs'
-
+gem "ruby-hmac"

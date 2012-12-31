@@ -2,7 +2,6 @@ require 'rubygems'
 require 'bundler'
 require 'base64'
 require 'openssl'
-require 'rubygems'
 require 'hmac-sha1'
 require 'base64'
 require 'logger'
@@ -114,7 +113,14 @@ end
 post '/update_post' do
 	id = params[:id]
 	@post = Post.get(id)
-	@post.update(:title => params[:title], :tags => params[:tags], :body => params[:body], :intro_image_url => params[:intro_image_url], :image_urls => params[:image_urls], :video_url => params[:video_url])
+	@post.update(	
+		:title => params[:title], 
+		:tags => params[:tags], 
+		:body => params[:body], 
+		:intro_image_url => params[:intro_image_url], 
+		:image_urls => params[:image_urls], 
+		:video_url => params[:video_url]
+	)
 	@post.update(:date => Time.now)
 	if @post.save
 		"success"
@@ -185,7 +191,13 @@ enable :sessions
 ##### ABOUT PAGE
 get '/about' do	
 	auth = Auth.get(1)
-	client = Fitgem::Client.new({:user_id => CONFIG[:fitbit][:user_id], :consumer_key => CONFIG[:fitbit][:auth][:consumer_key], :consumer_secret => CONFIG[:fitbit][:auth][:consumer_secret], :token => auth.access_token, :secret => auth.access_secret})
+	client = Fitgem::Client.new( { 
+		:user_id => CONFIG[:fitbit][:user_id], 
+		:consumer_key => CONFIG[:fitbit][:auth][:consumer_key], 
+		:consumer_secret => CONFIG[:fitbit][:auth][:consumer_secret], 
+		:token => auth.access_token, 
+		:secret => auth.access_secret 
+	} )
 	request_token = client.request_token
 	token = request_token.token
 	secret = request_token.secret
@@ -209,7 +221,7 @@ get '/about' do
 		auth.access_secret = access_token.secret 
 
 		if auth.save
-			puts "Verifier is: " + verifier + ", Token is:    "+access_token.token + ", Secret is:   "+ access_token.secret
+			puts "Verifier is: " + verifier + ", Token is:    " + access_token.token + ", Secret is:   " + access_token.secret
 		else
 			puts "you f'd up"
 		end
