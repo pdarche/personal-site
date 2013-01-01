@@ -236,7 +236,7 @@ get '/about' do
 		userid = '110334'
 		public_key = '507bc268681356f2'
 		today = Time.now.to_i
-		yestr = today.to_i - (24 * 60 * 60)
+		yestr = today.to_i - (30 * 24 * 60 * 60)
 
 		url = 'http://wbsapi.withings.net/measure?action=getmeas&userid='
 		url += "#{userid}&publickey=#{public_key}&startdate=#{yestr}&enddate=#{today}&limit=1";
@@ -255,7 +255,7 @@ get '/about' do
 		z = Zeo.new
 		res = z.yesterdays_data()
 
-		if res.has_key?("sleepStats")
+		if res["response"].has_key?("sleepStats")
 			sleepMins = res["response"]["sleepStats"]["totalZ"]
 			sleepHrs = sleepMins/60.0
 			timeAr = sleepHrs.to_s.split('.')
@@ -270,6 +270,7 @@ get '/about' do
 			@hrs = 0
 			@mins = 0
 		end
+
 		#OPENPATHS DATA
 		consumer_key = "YBT3QATFK3NCGWXT3EKEV2NC6GUHJM2IWLSGK4NEANZHUWDVKUOA"
 		consumer_secret = "DUHON4YZGHHZL8NUGG4WKBDVTZTCGE0C3AHRYC25SI8CP06BTL1B6PTYNXQ7XH5N"

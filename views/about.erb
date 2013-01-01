@@ -8,31 +8,47 @@
 	</div>
 
 	<div id="bottom_wrapper">
+		
 		<div id="steps" class="data">
-			<div id="steps_title">
-				Today, I've taken
-			</div>
-			<div id="steps_data">
-				<%= @steps %> <span id="steps_span"> steps </span>
-			</div>		
+			<% if @steps != 0 %>	
+				<div id="steps_title">
+					Today, I've taken
+				</div>
+				<div id="steps_data">
+					<%= @steps %> <span id="steps_span"> steps </span>
+				</div>
+			<% else %>
+				<div class="data-error"> Sorry, no steps data </div>
+			<% end %>		
 		</div>
 
 		<div id="weight" class="data">
-			<div id="weight_title">
-				I currently weigh 
-			</div>
-			<div id="weight_data">
-				<%= @weight %> <span id="weight_span"> lbs. </span>
-			</div>
+			<% if @weight != 0 %>
+				<div id="weight_title">
+					I currently weigh 
+				</div>
+				<div id="weight_data">
+					<%= @weight %> <span id="weight_span"> lbs. </span>
+				</div>
+			<% else %>
+				<div class="data-error"> Sorry, no weight data </div>
+			<% end %>
+
 		</div>
 
 		<div id="sleep" class="data">
-			<div id="sleep_title">
-				Last night, I slept for
-			</div>
-			<div id="sleep_data">
-				<%= @hrs %><span class="time_span"> hours & </span> <span id="mins_span"> <%= @mins %></span> <span id="minutes_span" class="time_span"> minutes </span>
-			</div>
+			<% if @hrs != 0 %>
+				<div id="sleep_title">
+					Last night, I slept for
+				</div>
+				<div id="sleep_data">
+					<%= @hrs %><span class="time_span"> hours & </span> <span id="mins_span"> <%= @mins %></span> <span id="minutes_span" class="time_span"> minutes </span>
+				</div>
+			<% else %>
+				<div class="data-error"> Sorry, no sleep data </div>
+			<% end %>
 		</div>
+	
 	</div>
+
 </div>
